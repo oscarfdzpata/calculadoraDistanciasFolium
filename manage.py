@@ -6,7 +6,12 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.settings')
+    #original
+    #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.settings')
+    #local
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.local')
+    #produccion
+    #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.production')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
