@@ -6,6 +6,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['192.168.1.46']
 #ALLOWED_HOSTS = []
 
+#
+#
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
