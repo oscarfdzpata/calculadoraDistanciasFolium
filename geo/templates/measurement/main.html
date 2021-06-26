@@ -42,24 +42,15 @@ calculate distance
 {% endif %}
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-          <hr>
-          <form action="" id="form" method="POST" autocomplete="off">
 
-              {% csrf_token %}
-              {{ form|crispy }}
-              <button id="submit_form" type="submit" class="btn btn-primary btn-block">Calcular</button>
-          </form>
-          <br>
-    </div>
-  </div>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col">
           <div id="mapa" style="position: relative; width: 100%; height: 100%;" >
-            <div style="position: absolute; left: 10px; top: 25px; width: 100%; height: 100%;"> 
+            <div style="position: relative; left: 1px; top: 25px; width: 100%; height: 100%"> 
               {{ map|safe }}
-
+              <br>
+              <br>
+              <br>
             </div>
 
             <div id="cargando-mapa" style="position: absolute; left: 50%; top: 100px; z-index: 3;">  
@@ -71,8 +62,29 @@ calculate distance
     </div>
   </div>
 
+  <div class="row">
+    <div class="col">
+          <hr>
+          <form action="" id="form" method="POST" autocomplete="off">
+
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button id="submit_form" type="submit" class="btn btn-primary btn-block">Calcular</button>
+          </form>
+          <br>
+    </div>
+  </div>
+
+  <!--
+  <div class="alert alert-primary" role="alert">
+    A simple primary alert—check it out!
+  </div>
+-->
 
 </div>
+<br>
+<br>
+<br>
 
 
 {% endblock content  %}
