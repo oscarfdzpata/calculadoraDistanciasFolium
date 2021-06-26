@@ -70,7 +70,7 @@ def calculate_distance_view(request):
 
     #initial folium map con Obispo Lepe
     #m= folium.Map(width=800, heigth=500, location=pointO)
-    m= folium.Map(width=800, heigth=500, location=get_center_coordinates(o_lat, o_lon), zoom_start=100)
+    m= folium.Map(width="100%", heigth=500, id="mapa", location=get_center_coordinates(o_lat, o_lon), zoom_start=100)
     #location marker
     folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=origen,
                 icon=folium.Icon(color='purple')).add_to(m)
@@ -105,7 +105,7 @@ def calculate_distance_view(request):
 
         #folium map modification
         #m= folium.Map(width=800, heigth=500, location=pointO)
-        m= folium.Map(width=800, heigth=500, location=get_center_coordinates(o_lat, o_lon, d_lat, d_lon), zoom_start=get_zoom(distance)) #zoom_start=15
+        m= folium.Map(width="100%", heigth=500, location=get_center_coordinates(o_lat, o_lon, d_lat, d_lon), zoom_start=get_zoom(distance)) #zoom_start=15
         #location marker
         folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=location, #popup=origen,
                 icon=folium.Icon(color='purple')).add_to(m)
