@@ -39,12 +39,24 @@
   </head>
   <body class="bg-white">
     <!-- Image and text -->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light mb-3">
       <a class="navbar-brand" href="#">
         <i class="fas fa-globe  fa-2x mr-2"></i>
         Calculador de distancias
       </a>
     </nav>
+
+    <nav class="navbar fixed-bottom  navbar-light bg-light">
+      <a class="navbar-brand" href="#"></a>                       
+              <div class="d-flex align-items-center justify-content-between small">
+                  <div class="text-muted mr-3">Copyright &copy; OscarFdzPata 2021</div>
+                  <div>
+                      <a href="#">Pol&iacute;tica de privacidad</a>
+                      &middot;                      
+                  </div>
+              </div>          
+    </nav>
+
     <div class="container-fluid">
         
     <!--
@@ -55,6 +67,8 @@
   -->
         {% block content %}
         {% endblock content %}
+    
+
     </div>    
 
     <!-- Optional JavaScript; choose one of the two! -->

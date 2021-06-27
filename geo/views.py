@@ -83,49 +83,59 @@ def calculate_distance_view(request):
         #instance.destination=form.cleaned_data.get('destination')
         destination_=form.cleaned_data.get('destination')        
         destination=geolocator.geocode(destination_)
-        print(destination)
-        print(destination.latitude)        
-        #destino cordenadas
-        d_lat=destination.latitude
-        print(destination.longitude)
-        d_lon=destination.longitude
 
-        #origen cordenadas desde el form
-        location_=form.cleaned_data.get('location')        
-        location=geolocator.geocode(location_)
-        print(location)
-        print(location.latitude)        
-        #origen cordenadas
-        o_lat=location.latitude
-        print(location.longitude)
-        o_lon=location.longitude
-        pointO = (o_lat, o_lon)
+        #Comprobamos el valor de destination
+        if destination is None:
+            print ("\n Valor de destination incorrecto")
+ 
+        
+        try:
 
+            print(destination)
+            print(destination.latitude)        
+            #destino cordenadas
+            d_lat=destination.latitude
+            print(destination.longitude)
+            d_lon=destination.longitude
 
-        pointB = (d_lat, d_lon)
-        #calculo de distancias
-        distance=round(geodesic(pointO,pointB).km,2)
-
-        #folium map modification
-        #m= folium.Map(width=800, heigth=500, location=pointO)
-        m= folium.Map(width="100%", heigth=500, location=get_center_coordinates(o_lat, o_lon, d_lat, d_lon), zoom_start=get_zoom(distance)) #zoom_start=15
-        #location marker
-        folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=location, #popup=origen,
-                icon=folium.Icon(color='purple')).add_to(m)
-        #destination marker
-        folium.Marker([d_lat, d_lon], tooltip='click aqui para ver mas', popup=destination,
-                icon=folium.Icon(color='red', icon='cloud')).add_to(m)
+            #origen cordenadas desde el form
+            location_=form.cleaned_data.get('location')        
+            location=geolocator.geocode(location_)
+            print(location)
+            print(location.latitude)        
+            #origen cordenadas
+            o_lat=location.latitude
+            print(location.longitude)
+            o_lon=location.longitude
+            pointO = (o_lat, o_lon)
 
 
-        #Draw the line beetewn location and destination
-        line= folium.PolyLine(locations=[pointO,pointB], weight=2, color='blue')
-        m.add_child(line)
+            pointB = (d_lat, d_lon)
+            #calculo de distancias
+            distance=round(geodesic(pointO,pointB).km,2)
 
-        instance.destination=destination
-        instance.location=location
-        instance.distance= distance
-        instance.save()
-        obj=Measurement.objects.last()
+            #folium map modification
+            #m= folium.Map(width=800, heigth=500, location=pointO)
+            m= folium.Map(width="100%", heigth=500, location=get_center_coordinates(o_lat, o_lon, d_lat, d_lon), zoom_start=get_zoom(distance)) #zoom_start=15
+            #location marker
+            folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=location, #popup=origen,
+                    icon=folium.Icon(color='purple')).add_to(m)
+            #destination marker
+            folium.Marker([d_lat, d_lon], tooltip='click aqui para ver mas', popup=destination,
+                    icon=folium.Icon(color='red', icon='cloud')).add_to(m)
+
+
+            #Draw the line beetewn location and destination
+            line= folium.PolyLine(locations=[pointO,pointB], weight=2, color='blue')
+            m.add_child(line)
+
+            instance.destination=destination
+            instance.location=location
+            instance.distance= distance
+            instance.save()
+            obj=Measurement.objects.last()
+        except Exception as e:
+            print("\n Ocurrio algun error, puede ser el location o el destination: ", e)
 
     m= m._repr_html_()
 

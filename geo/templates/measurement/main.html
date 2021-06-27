@@ -35,11 +35,21 @@ calculate distance
       </div>
     </div>
   </div>
-{% if distance is not None %}
+<div class="container">
+{% if distance is not None and request.POST %}
 <div class="alert alert-success" role="alert">
+  <i class="fas fa-check"></i>
     La distancia entre <span class="badge badge-secondary">{{ location|upper }} </span> y <span class="badge badge-secondary"> {{ destination|upper }}  </span> es: {{ distance }} km
-</div>    
+</div>  
 {% endif %}
+
+{% if distance is None and request.POST %}
+<div class="alert alert-danger" role="alert">
+  <i class="fas fa-exclamation-triangle"></i>  El origen y destino deben existir!!!!!!!!!!!!
+</div>  
+{% endif %}
+</div>
+
 
   <div class="row">
     <div class="col">
