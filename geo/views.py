@@ -24,6 +24,9 @@ def calculate_distance_view(request):
     form= MeasurementModelForm(request.POST or None)
     geolocator= Nominatim(user_agent='measurements')
 
+    location_= None
+    destination_=None
+
     ip= '90.170.170.12'
     country, city, lat, lon = get_geo(ip)
     print('location country', country)
@@ -131,6 +134,8 @@ def calculate_distance_view(request):
         'distance' : distance,
         'form': form,
         'map': m,
+        'location': location_,
+        'destination': destination_,
     }
 
     return render(request, 'measurement/main.html',context )
