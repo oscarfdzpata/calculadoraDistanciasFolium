@@ -12,10 +12,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 #original
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.settings')
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.settings')
 #local
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.local')
 #Produccion
-#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.production')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.production')
 
 application = get_wsgi_application()
