@@ -50,10 +50,10 @@ calculate distance
 {% endif %}
 </div>
 
-
+<hr>
   <div class="row">
-    <div class="col">
-          <hr>
+    <div class="col-12  col-lg-6 col-md-6">
+       
           <form action="" id="form" method="POST" autocomplete="off">
 
               {% csrf_token %}
@@ -62,10 +62,39 @@ calculate distance
           </form>
           <br>
     </div>
+    
+    <div class="col-12 col-sm-12 col-lg-6 col-md-6" style="font-size: 9px;">
+      <h6>Últimas 5 busquedas</h6>
+      <table class="table">
+        <thead class="thead-ligth">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Km</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for obj_m in obj_measurements %}
+          <tr>
+            <th scope="row">{{ obj_m.id|truncatechars:20 }}</th>
+            <td>{{ obj_m.location|truncatechars:30 }} </td>
+            <td>{{ obj_m.destination|truncatechars:15 }}</td>
+            <td>{{ obj_m.distance|truncatechars:15 }} km</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+       
+
+    </div>
+
+  
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col ">
           <div id="mapa" style="position: relative; width: 100%; height: 100%;" >
             <div style="position: relative; left: 1px; top: 25px; width: 100%; height: 100%"> 
               {{ map|safe }}

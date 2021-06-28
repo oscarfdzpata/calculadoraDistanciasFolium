@@ -139,8 +139,10 @@ def calculate_distance_view(request):
 
     m= m._repr_html_()
 
+    obj_measurement= Measurement.objects.all().order_by('-id')[:5]
+
     context={
-        #'distance' : obj,
+        'obj_measurements' : obj_measurement,
         'distance' : distance,
         'form': form,
         'map': m,
