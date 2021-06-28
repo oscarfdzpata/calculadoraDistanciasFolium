@@ -78,8 +78,8 @@ calculate distance
           {% for obj_m in obj_measurements %}
           <tr>
             <th scope="row">{{ obj_m.id|truncatechars:20 }}</th>
-            <td>{{ obj_m.location|truncatechars:30 }} </td>
-            <td>{{ obj_m.destination|truncatechars:15 }}</td>
+            <td data-toggle="tooltip" data-placement="top" title="{{ obj_m.location }}">{{ obj_m.location|truncatechars:30 }} </td>
+            <td data-toggle="tooltip" data-placement="top" title="{{ obj_m.destination }}">{{ obj_m.destination|truncatechars:30 }}</td>
             <td>{{ obj_m.distance|truncatechars:15 }} km</td>
           </tr>
           {% endfor %}
@@ -137,6 +137,12 @@ calculate distance
     );
     {% endif %}
     
+</script>
+
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
 </script>
 
 <script>
