@@ -26,7 +26,10 @@ def get_center_coordinates(latA, lonA, latB=None, lonB=None):
     return cord
 
 def get_zoom(distance):
-    if distance <= 10:
+    if distance <= 0.5:
+        print("\n Distance Menor de 0,5", distance )
+        return 16
+    elif distance <= 10:
         print("\n Distance Menor de 10", distance )
         return 15
     elif distance <=100:

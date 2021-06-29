@@ -1,5 +1,6 @@
 {% extends 'measurement/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}
 calculate distance
@@ -51,8 +52,8 @@ calculate distance
 </div>
 
 <hr>
-  <div class="row">
-    <div class="col-12  col-lg-6 col-md-6">
+  <div class="row size-font-screenResponsive">
+    <div class="col-12  col-lg-6 col-md-6  size-font-screenResponsive">
        
           <form action="" id="form" method="POST" autocomplete="off">
 
@@ -63,9 +64,10 @@ calculate distance
           <br>
     </div>
     
-    <div class="col-12 col-sm-12 col-lg-6 col-md-6" style="font-size: 9px;">
-      <h6>Últimas 5 busquedas</h6>
-      <table class="table">
+    <div class="col-12 col-sm-12 col-lg-6 col-md-6" >
+    <!-- <div class="col-12 col-sm-12 col-lg-6 col-md-6" style="font-size: 9px;"></div> -->
+      <h6 class="prueba">Últimas 5 busquedas</h6>
+      <table class="table  size-font-screenResponsive">
         <thead class="thead-ligth">
           <tr>
             <th scope="col">#</th>
@@ -74,9 +76,14 @@ calculate distance
             <th scope="col">Km</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="size-font-screenResponsive">
+
           {% for obj_m in obj_measurements %}
-          <tr>
+          {% if forloop.counter == 1 %}
+            <tr class="bg-light">
+          {% else %}
+            <tr>
+          {% endif %}
             <th scope="row">{{ obj_m.id|truncatechars:20 }}</th>
             <td data-toggle="tooltip" data-placement="top" title="{{ obj_m.location }}">{{ obj_m.location|truncatechars:30 }} </td>
             <td data-toggle="tooltip" data-placement="top" title="{{ obj_m.destination }}">{{ obj_m.destination|truncatechars:30 }}</td>

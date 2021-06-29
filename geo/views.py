@@ -137,9 +137,62 @@ def calculate_distance_view(request):
         except Exception as e:
             print("\n Ocurrio algun error, puede ser el location o el destination: ", e)
 
-    m= m._repr_html_()
 
     obj_measurement= Measurement.objects.all().order_by('-id')[:5]
+
+    if request.method=="GET":
+        print("\n entra por get")
+        try:        
+            last_measeure_save=Measurement.objects.all().last()
+            destination_= last_measeure_save.destination
+            destination=geolocator.geocode(destination_)
+            print("\n Destination_ en Get:", destination_)
+            print("\n Destination en Get:", destination)
+
+            #destino cordenadas
+            d_lat=destination.latitude
+            print(destination.longitude)
+            d_lon=destination.longitude
+
+            #origen cordenadas desde el form
+            location_=last_measeure_save.location
+            location=geolocator.geocode(location_)
+            print(location)
+            print(location.latitude)        
+            #origen cordenadas
+            o_lat=location.latitude
+            print(location.longitude)
+            o_lon=location.longitude
+            pointO = (o_lat, o_lon)
+
+
+            pointB = (d_lat, d_lon)
+            #calculo de distancias
+            distance=round(geodesic(pointO,pointB).km,2)
+
+            #folium map modification
+            #m= folium.Map(width=800, heigth=500, location=pointO)
+            m= folium.Map(width="100%", heigth=500, location=get_center_coordinates(o_lat, o_lon, d_lat, d_lon), zoom_start=get_zoom(distance)) #zoom_start=15
+            #location marker
+            folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=location, #popup=origen,
+                    icon=folium.Icon(color='purple')).add_to(m)
+            #destination marker
+            folium.Marker([d_lat, d_lon], tooltip='click aqui para ver mas', popup=destination,
+                    icon=folium.Icon(color='red', icon='cloud')).add_to(m)
+
+
+            #Draw the line beetewn location and destination
+            line= folium.PolyLine(locations=[pointO,pointB], weight=2, color='blue')
+            m.add_child(line)
+
+        except Exception as e:
+            print("\n Ocurrio algun error, puede ser el location o el destination: ", e)
+
+
+
+    m= m._repr_html_()
+
+    
 
     context={
         'obj_measurements' : obj_measurement,

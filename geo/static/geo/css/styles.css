@@ -1,0 +1,39 @@
+
+input{
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;    
+    border-radius: 0px !important;
+    /*border-bottom:  1px  solid      rgb(0, 0, 0) !important;*/
+}
+
+input:focus {
+    outline: none;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;  
+  }
+
+button{
+    border-radius: 25px !important;
+}
+input:hover,
+input:focus{
+  
+   
+    transition: all 1s ease-out !important;
+    outline: 0 !important;
+    cursor: pointer !important;
+    }
+
+.size-font-screenResponsive{
+    font-size: 12px;
+    /*background-color: yellow;*/
+}
+
+@media (max-width: 600px) {
+    .size-font-screenResponsive {
+      /*display: none;*/
+      font-size: 9px;
+    }
+  }
