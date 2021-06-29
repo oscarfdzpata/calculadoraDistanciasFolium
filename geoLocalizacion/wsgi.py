@@ -18,4 +18,7 @@ from django.core.wsgi import get_wsgi_application
 #Produccion
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geoLocalizacion.production')
 
-application = get_wsgi_application()
+#application = get_wsgi_application()  #lo comentamos para que sirvan los staticos el dj-static
+from dj_static import  Cling
+application = Cling(get_wsgi_application())
+
