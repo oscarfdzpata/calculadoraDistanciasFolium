@@ -40,7 +40,7 @@ Calcula distancias
 {% if distance is not None and request.POST %}
 <div class="alert alert-success" role="alert">
   <i class="fas fa-check"></i>
-    La distancia entre <span class="badge badge-secondary">{{ location|upper|truncatechars:50 }} </span> y <span class="badge badge-secondary"> {{ destination|upper|truncatechars:50  }}  </span> es: {{ distance }} km
+    La distancia entre <span class="badge badge-secondary text-wrap">{{ location|upper|truncatechars:50 }} </span> y <span class="badge badge-secondary text-wrap"> {{ destination|upper|truncatechars:50  }}  </span> es: {{ distance }} km
 </div>  
 {% endif %}
 
