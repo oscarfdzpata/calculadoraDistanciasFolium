@@ -25,7 +25,7 @@ calculate distance
           </button>
         </div>
         <div class="modal-body">
-          La distancia a tu destino entre <span class="badge badge-secondary">{{ location|upper }} </span> y <span class="badge badge-secondary"> {{ destination|upper }}  </span> es {{ distance }} km
+          La distancia a tu destino entre <span class="badge badge-secondary">{{ location|upper|truncatechars:50  }} </span> y <span class="badge badge-secondary"> {{ destination|upper|truncatechars:50  }}  </span> es {{ distance }} km
         </div>
         <div class="modal-footer">
             <!--
@@ -40,7 +40,7 @@ calculate distance
 {% if distance is not None and request.POST %}
 <div class="alert alert-success" role="alert">
   <i class="fas fa-check"></i>
-    La distancia entre <span class="badge badge-secondary">{{ location|upper }} </span> y <span class="badge badge-secondary"> {{ destination|upper }}  </span> es: {{ distance }} km
+    La distancia entre <span class="badge badge-secondary">{{ location|upper|truncatechars:50 }} </span> y <span class="badge badge-secondary"> {{ destination|upper|truncatechars:50  }}  </span> es: {{ distance }} km
 </div>  
 {% endif %}
 
@@ -59,6 +59,7 @@ calculate distance
 
               {% csrf_token %}
               {{ form|crispy }}
+          
               <button id="submit_form" type="submit" class="btn btn-outline-secondary btn-block">Calcular</button>
           </form>
           <br>
@@ -175,7 +176,18 @@ calculate distance
 
     }
 
-    form.addEventListener("submit", handleSubmit)
+    //form.addEventListener("submit", handleSubmit)
+    //La misma funcion pero usando arrow
+    form.addEventListener("submit", handleSubmitArrow = (event) =>{
+      var elem = document.getElementById("submit_form");      
+      document.getElementById("submit_form").innerHTML=contenido;
+      elem.setAttribute("disabled", "");
+      //$("#submit_form").html('<span  class="spinner-border spinner-border-sm mr-2 mt-1 float-right ml-2" aria-hidden="true" role="status"></span> Enviando ID...');      
+      document.getElementById("cargando-mapa").innerHTML+=contenido2;
+      console.log(event);
+
+    });
+
 
 </script>
 
