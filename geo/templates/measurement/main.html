@@ -49,6 +49,11 @@ Calcula distancias
   <i class="fas fa-exclamation-triangle"></i>  El origen y destino deben existir!!!!!!!!!!!!
 </div>  
 {% endif %}
+{% if search_location is None and request.GET %}
+<div class="alert alert-danger" role="alert">
+  <i class="fas fa-exclamation-triangle"></i>  La busqueda no existe!
+</div>  
+{% endif %}
 </div>
 
 <hr>

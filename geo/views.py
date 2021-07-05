@@ -46,24 +46,42 @@ def calculate_distance_view(request):
 
     #Pongo el valor de origen por defecto en Obispo Lepe ####################################################
     origen_='obispo lepe, logroño'
-    origen=geolocator.geocode(origen_)
-    location= origen       
-    #origen cordenadas
-    o_lat=origen.latitude
-    print(origen.longitude)
-    o_lon=origen.longitude
-    pointO=(o_lat, o_lon)
-    #initial folium map con Obispo Lepe
-    #m= folium.Map(width=800, heigth=500, location=pointO)
-    m= folium.Map(width="100%", heigth=500, id="mapa", location=get_center_coordinates(o_lat, o_lon), zoom_start=100)
-    #location marker
-    folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=origen,
-                icon=folium.Icon(color='purple')).add_to(m)
+    search_location = None
+    if request.GET.get('search_location'):
+        search_location = request.GET.get('search_location')
+        print("\n Search Location:" , search_location)
+        origen_=search_location
+    try:
+        origen=geolocator.geocode(origen_)
+        location= origen       
+        #origen cordenadas
+        if location is not  None:
+            o_lat=origen.latitude
+            o_lon=origen.longitude
+        else:
+            search_location = None
+            origen_='Logroño'
+            origen=geolocator.geocode(origen_)
+            location= origen       
+            #origen cordenadas
+            o_lat=origen.latitude
+            o_lon=origen.longitude
+
+        pointO=(o_lat, o_lon)
+        #initial folium map con Obispo Lepe
+        #m= folium.Map(width=800, heigth=500, location=pointO)
+        m= folium.Map(width="100%", heigth=500, id="mapa", location=get_center_coordinates(o_lat, o_lon), zoom_start=5)
+        #location marker
+        folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=origen,
+                    icon=folium.Icon(color='purple')).add_to(m)
+    except Exception as e:
+        print("\n Ocurrio algun error, puede ser el location  ", e)
 
     
 
 
-    if request.method=="GET":
+    if request.method=="GET" and request.GET.get('search_location') is  None:
+
         try:        
             last_measeure_save=Measurement.objects.all().last()
             destination_= last_measeure_save.destination
@@ -178,6 +196,7 @@ def calculate_distance_view(request):
         'map': m,
         'location': location_,
         'destination': destination_,
+        'search_location' : search_location,
     }
 
     return render(request, 'measurement/main.html',context )

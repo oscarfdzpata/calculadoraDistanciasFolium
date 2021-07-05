@@ -42,17 +42,41 @@
   </head>
   <body class="bg-white">
     <!-- Image and text -->
-    <nav class="navbar navbar-dark bg-dark mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">      
       <a class="navbar-brand" href="{% url 'main' %}">
         <i class="fas fa-globe  fa-2x mr-2"></i>
-        Calculador de distancias
+        <span class="size-font-screenResponsive-brandTex">Calculador de distancias </span>
       </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+     
+          <form class="form-inline" action="" method="GET">
+            <!--
+            <input style="outline: none; " name="search_location" id="search_location" placeholder="Buscar" class="form-control mr-sm-2 input-search" size='15' >
+            <button class="btn btn-outline-light ml-2 my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            -->
+            
+            <div class="d-flex justify-content-around h-100">
+              <div class="searchbar">
+               
+                 <!--  <a href="#" class="search_icon"><i class="fas fa-search"></i></a>  -->
+                  <button class="btn btn-outline-none search_icon ml-2 my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                  <input class="search_input"  name="search_location" id="search_location" type="text" name="" placeholder="Buscar...">
+              </div>
+            </div>
+          
+          </form>
+          </div>
+
     </nav>
 
     <nav class="navbar fixed-bottom  navbar-light bg-light">
-      <a class="navbar-brand" href="#"></a>                       
+      <a class="navbar-brand" href="#"></a>                             
               <div class="d-flex align-items-center justify-content-between small">
-                  <div class="text-muted mr-3">Copyright &copy; OscarFdzPata 2021</div>
+                  <div class="text-muted mr-3">Copyright &copy;OscarFdzPata 2021</div>
                   <div>
                       <a href="#">Pol&iacute;tica de privacidad</a>
                       &middot;                      
