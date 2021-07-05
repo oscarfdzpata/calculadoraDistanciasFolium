@@ -70,10 +70,18 @@ def calculate_distance_view(request):
         pointO=(o_lat, o_lon)
         #initial folium map con Obispo Lepe
         #m= folium.Map(width=800, heigth=500, location=pointO)
-        m= folium.Map(width="100%", heigth=500, id="mapa", location=get_center_coordinates(o_lat, o_lon), zoom_start=5)
+        m= folium.Map(width="100%", heigth=500, id="mapa", location=get_center_coordinates(o_lat, o_lon), zoom_start=100)
         #location marker
-        folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=origen,
+        popupText= '<h6>' + str( origen ) +  '</h6>'
+        print("\n popUpText:", popupText)
+        folium.Marker([o_lat, o_lon], tooltip='click aqui para ver mas', popup=folium.Popup(popupText,show=True),
+                    draggable=True,
                     icon=folium.Icon(color='purple')).add_to(m)
+        '''
+        folium.Popup( html = None , parse_html = False , max_width = '100%' , show = True , sticky = True, default_open=True  ).add_to(m)
+        folium.Popup(default_open=True)
+        #folium.Popup(show=False).add_to(m)
+        '''
     except Exception as e:
         print("\n Ocurrio algun error, puede ser el location  ", e)
 

@@ -36,13 +36,20 @@ input:focus{
 }
 
 @media (max-width: 600px) {
+    .justifyContentEnd{      
+      flex-wrap: wrap !important;  
+      justify-content: flex-start !important;      
+    }
+
     .size-font-screenResponsive {
       /*display: none;*/
       font-size: 9px;
     }
+
     .size-font-screenResponsive-brandText{
       font-size: 14px;
     }
+
 }
 
 .input-search{
@@ -60,6 +67,10 @@ input:focus{
   background-color: #343a40 !important;
 }
 
+.justifyContentEnd{
+  display: flex;
+  justify-content: flex-end;
+}
 
 .searchbar{
   margin-bottom: auto;
@@ -77,7 +88,8 @@ input:focus{
   outline: 0;
   background: none;
 
-  width: 0;
+  /*width: 0; */
+  width: 60px;
   caret-color:transparent;
   line-height: 40px;
   transition: width 0.4s linear;
@@ -92,7 +104,8 @@ input:focus{
   }
 
   .searchbar:hover > .search_icon{
-  background: white;
+  /*background: white;*/
+  background-color: #353b48;
   color: #e74c3c;
   }
 
